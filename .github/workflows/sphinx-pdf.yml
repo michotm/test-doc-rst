@@ -36,11 +36,10 @@ jobs:
     - name: Build PDF with Sphinx
       run: |
         cd documentation/
-        sphinx-build -b latex . _build/latex
-        make -C _build/latex all-pdf
-      
+        make pdf
+        
     - name: Upload PDF
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: sphinx-pdf
         path: documentation/_build/latex/*.pdf
