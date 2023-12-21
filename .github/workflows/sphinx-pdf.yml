@@ -1,4 +1,4 @@
-name: Build Sphinx PDF on Push
+name: Build Sphinx PDF on PR
 
 on:
   pull_request:
