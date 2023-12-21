@@ -159,7 +159,10 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# sphynx doc
+documentation/_build/
 
 # Visual Studio Code
 .vscode
 .history
+

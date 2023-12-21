@@ -1,0 +1,42 @@
+name: Build Sphinx PDF on Push
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra latexmk
+        pip install sphinx
+
+    - name: Check if documentation exists
+      run: |
+        if [ ! -d "documentation/" ]; then
+          echo "Documentation directory does not exist."
+          exit 0
+        fi
+
+    - name: Build PDF with Sphinx
+      run: |
+        cd documentation/
+        sphinx-build -b latex . _build/latex
+        make -C _build/latex all-pdf
+      
+    - name: Upload PDF
+      uses: actions/upload-artifact@v2
+      with:
+        name: sphinx-pdf
+        path: documentation/_build/latex/*.pdf
