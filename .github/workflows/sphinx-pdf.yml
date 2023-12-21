@@ -1,7 +1,7 @@
 name: Build Sphinx PDF on Push
 
 on:
-  push:
+  pull_request:
     branches: [ main ]
 
 jobs:
