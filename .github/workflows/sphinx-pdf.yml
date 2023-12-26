@@ -43,3 +43,11 @@ jobs:
       with:
         name: sphinx-pdf
         path: documentation/_build/latex/*.pdf
+
+    - name: Git commit the pdf
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email ""
+        git add documentation/_build/latex/*.pdf
+        git commit -m "Update PDF"
+        git push
